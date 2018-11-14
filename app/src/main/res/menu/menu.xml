@@ -1,0 +1,34 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_weekback"
+        android:icon="@drawable/ic_keyboard_arrow_left_black_24dp"
+        android:title="Week Back"
+
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/menu_weeknum"
+        android:checkable="false"
+        android:padding="0dip"
+        android:title="00"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/action_weekforward"
+        android:icon="@drawable/ic_keyboard_arrow_right_black_24dp"
+        android:title="Week Forward"
+
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_date"
+        android:icon="@drawable/ic_date_range_black_24dp"
+        android:title="Search"
+
+        app:showAsAction="always"/>
+
+
+</menu>

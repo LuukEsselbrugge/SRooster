@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <CheckBoxPreference android:title="Auto expand"
+        android:defaultValue="false"
+        android:summary="When checked will automatically expand all schedule items on startup"
+        android:key="autoExpand" />
+    <CheckBoxPreference android:title="Week arrows"
+        android:defaultValue="true"
+        android:summary="When checked will show next week, previous week and week number in action bar"
+        android:key="weekArrows" />
+    <ListPreference android:title="Reminders"
+        android:summary="Select when a reminder will be sent"
+        android:key="reminderTime"
+        android:defaultValue="900000"
+        android:entries="@array/listArray"
+        android:entryValues="@array/listValues" />
+</PreferenceScreen>

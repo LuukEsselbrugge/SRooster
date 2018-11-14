@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/sliding_tabs"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary"
+        app:tabBackground="@color/colorPrimary"
+        app:tabIndicatorColor="@android:color/background_light"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="@android:color/background_light"
+        app:tabTextColor="@android:color/darker_gray" />
+
+    <LinearLayout
+        android:id="@+id/offlineMode"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/infoinline"
+            android:ellipsize="end"
+            android:gravity="center|start"
+            android:maxLines="1"
+            android:onClick="offlineModeClick"
+            android:text="Offline Mode"
+            android:textColor="@android:color/darker_gray"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@android:color/white" />
+
+
+</LinearLayout>
