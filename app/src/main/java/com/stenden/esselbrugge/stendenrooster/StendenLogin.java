@@ -116,8 +116,9 @@ public class StendenLogin extends AppCompatActivity {
                 SharedPreferences SP = getApplicationContext().getSharedPreferences("Cookies", MODE_PRIVATE);
                 SP.edit().putString("Cookie",koekjes).commit();
 
+                SP.edit().putString("Email",Email.getText() + "").apply();
+
                 if(keepLoggedIn.isChecked()){
-                    SP.edit().putString("Email",Email.getText() + "").apply();
                     SP.edit().putString("Password",Password.getText() + "").apply();
                 }
 
@@ -138,6 +139,7 @@ public class StendenLogin extends AppCompatActivity {
             Log.d("Login",e.toString());
         }
     }
+
 
 
 }

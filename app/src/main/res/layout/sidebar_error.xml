@@ -42,7 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="25dp"
-            android:text="We couldn\'t find what you\'re looking for right now \n Please try restarting the app or logging back in"
+            android:text="We couldn\'t find what you\'re looking for right now \n If this keeps happening try restarting the app or logging back in"
             android:textAlignment="center" />
 
         <Button

@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -103,7 +104,14 @@ public class SearchActivity extends AppCompatActivity {
 
             actionBar.setCustomView(v);
 
-            final EditText editText = (EditText) findViewById(R.id.searchBar);
+            final EditText editText = findViewById(R.id.searchBar);
+            editText.requestFocus();
+            try {
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
+            }catch (Exception e){
+                Log.e("Error",e.toString());
+            }
 
             editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                 @Override

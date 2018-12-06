@@ -11,29 +11,57 @@
 
     <LinearLayout
         android:layout_width="300dp"
-        android:layout_height="100dp"
+        android:layout_height="105dp"
         android:background="@color/SideBarBG"
+        android:clickable="true"
         android:orientation="vertical"
-        android:clickable="true">
+        android:padding="10dp">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:scaleType="fitCenter"
-            android:scaleX="0.8"
-            android:tint="@android:color/white"
-            local:srcCompat="@drawable/ic_sroosterlogo" />
+        <LinearLayout
+            android:layout_width="40dp"
+            android:layout_height="40dp"
 
-        <TextView
-            android:id="@+id/textView"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/circle"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/sidebarLetters"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="OM"
+                android:textColor="#fff" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center"
-            android:text="SRooster"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/SideBarBG"
+            android:clickable="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/sidebarName"
+                android:layout_width="match_parent"
+                android:layout_height="18dp"
+                android:text=""
+                android:textColor="@android:color/white"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/sidebarEmail"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:text=""
+                android:textColor="@android:color/white"
+                android:textSize="13sp" />
+
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <RelativeLayout
@@ -49,6 +77,8 @@
             android:layout_height="match_parent"
             android:background="@android:color/background_light"
             android:clickable="false"
+            android:divider="@null"
+            android:dividerHeight="0dp"
             android:focusable="false" />
 
     </RelativeLayout>

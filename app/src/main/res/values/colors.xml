@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#004489</color>
-    <color name="colorPrimaryDark">#003e7c</color>
+    <color name="colorPrimaryDark">#004489</color>
     <color name="colorAccent">#3f51b5</color>
     <color name="SideBarBG">#004c97</color>
     <color name="SideBarIcon">#464646</color>
+
+    <!--<color name="colorPrimary">#004489</color>-->
+    <!--<color name="colorPrimaryDark">#003e7c</color>-->
+    <!--<color name="colorAccent">#3f51b5</color>-->
+    <!--<color name="SideBarBG">#004c97</color>-->
+    <!--<color name="SideBarIcon">#464646</color>-->
 
 </resources>

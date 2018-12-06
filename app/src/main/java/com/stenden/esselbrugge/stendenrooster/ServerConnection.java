@@ -71,9 +71,23 @@ public class ServerConnection {
             // writing exception to log
             Log.d("Error",e.toString());
             Log.d("Using Cache",file);
+
+            //Probeer eerst login
+            SharedPreferences SP1 = context.getSharedPreferences("Cookies", MODE_PRIVATE);
+            String em = SP1.getString("Email","");
+            String pw = SP1.getString("Password","");
+
+            if(!em.equals("") && !pw.equals("")) {
+                final String koekjes = this.Login(em, pw, context);
+                if (!koekjes.equals("Error") && !koekjes.equals("")) {
+                    SP1.edit().putString("Cookie", koekjes).commit();
+                    Log.d("Error", "New session auto created");
+                    return httpGET(file, context);
+                }
+            }
+
             //Probeer te laden uit cache
             SharedPreferences SP = context.getSharedPreferences("WebCache", MODE_PRIVATE);
-
             return SP.getString(file,"");
         }
 

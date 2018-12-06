@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.AssetManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Build;
@@ -38,6 +39,7 @@ import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -80,6 +82,9 @@ public class MainActivity extends AppCompatActivity{
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setElevation(0);
+
+//        SharedPreferences SP = getApplicationContext().getSharedPreferences("Cookies", MODE_PRIVATE);
+//        SP.edit().putString("Cookie","yeet").commit();
 
     }
 
@@ -165,19 +170,6 @@ public class MainActivity extends AppCompatActivity{
             CurrentFavo = (List<Map<String, String>>)inputstream.readObject();
 
             inputstream.close();
-            if(CurrentFavo.size() == 0){
-                Intent myIntent = new Intent(MainActivity.this, SearchActivity.class);
-                startActivityForResult(myIntent, 1);
-                View C = findViewById(R.id.content);
-                ViewGroup parent1 = (ViewGroup) C.getParent();
-                int index = parent1.indexOfChild(C);
-                parent1.removeView(C);
-                C = getLayoutInflater().inflate(R.layout.sidebar_error, parent1, false);
-                parent1.addView(C, index);
-
-                TextView errortext = (TextView)findViewById(R.id.TextError);
-                errortext.setText("Please select a schedule from the sidebar");
-            }
 
             CurrentIDs.add(0,CurrentFavo.get(0).get("ID"));
             getSchedule(CurrentDate,CurrentIDs);
@@ -193,6 +185,8 @@ public class MainActivity extends AppCompatActivity{
             parent1.addView(C, index);
 
             TextView errortext = (TextView)findViewById(R.id.TextError);
+            Button b = C.findViewById(R.id.button);
+            b.setVisibility(View.GONE);
             errortext.setText("Please select a schedule from the sidebar");
         }
     }
@@ -250,7 +244,31 @@ public class MainActivity extends AppCompatActivity{
         });
 
 
-    }
+        TextView Name = findViewById(R.id.sidebarName);
+        TextView Email = findViewById(R.id.sidebarEmail);
+        TextView Letters = findViewById(R.id.sidebarLetters);
+
+        SharedPreferences SP = getApplicationContext().getSharedPreferences("Cookies", MODE_PRIVATE);
+        String email = SP.getString("Email","");
+
+        if(!email.equals("")) {
+            Email.setText(email);
+
+            String[] tmp = email.split("\\@");
+            String[] fn = tmp[0].split("\\.");
+            Name.setText("");
+            for (String s : fn) {
+                Name.setText(Name.getText() + s.substring(0, 1).toUpperCase() + s.substring(1) + " ");
+            }
+
+            Letters.setText(fn[0].substring(0, 1).toUpperCase() + fn[1].substring(0, 1).toUpperCase());
+        }else{
+            Name.setText("Offline Mode");
+            Email.setText("Not logged in");
+            Letters.setText("OM");
+        }
+
+        }
 
     private void addFavorites() {
         final ListView favlist = (ListView)findViewById(R.id.FavoriteList);
@@ -369,14 +387,15 @@ public class MainActivity extends AppCompatActivity{
                     }
 
                     getSchedule(CurrentDate,CurrentIDs);
+                    if(!compareMode) {
+                        mDrawerLayout.closeDrawers();
+                        getSupportActionBar().setTitle(data.get(position).get("Name"));
+                    }else{
+                        getSupportActionBar().setTitle("Compare");
+                        addFavorites();
+                    }
                 }
-                if(!compareMode) {
-                    mDrawerLayout.closeDrawers();
-                    getSupportActionBar().setTitle(data.get(position).get("Name"));
-                }else{
-                    getSupportActionBar().setTitle("Compare");
-                    addFavorites();
-                }
+
             }
         });
 
@@ -866,6 +885,27 @@ public class MainActivity extends AppCompatActivity{
         if (requestCode == 1) {
             if(resultCode == Activity.RESULT_OK){
                 addFavorites();
+
+                List<Map<String, String>> CurrentFavo = new ArrayList<>();
+
+                try {
+                    File file = new File(getDir("data", MODE_PRIVATE), "favorites");
+                    ObjectInputStream inputstream = new ObjectInputStream(new FileInputStream(file));
+                    CurrentFavo = (List<Map<String, String>>)inputstream.readObject();
+                    inputstream.close();
+
+                    String CurrentDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+                    CurrentIDs.clear();
+                    CurrentIDs.add(0,CurrentFavo.get(CurrentFavo.size() - 1).get("ID"));
+                    getSchedule(CurrentDate,CurrentIDs);
+                    getSupportActionBar().setTitle(CurrentFavo.get(CurrentFavo.size() - 1).get("Name"));
+
+                    addDrawerItems();
+
+                }catch (Exception e){
+
+                }
+
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
@@ -962,9 +1002,9 @@ public class MainActivity extends AppCompatActivity{
     public void offlineModeClick(View v){
         AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
         alertDialog.setTitle("Offline Mode");
-        alertDialog.setMessage("You are seeing this message because you have no internet connection or you login information has expired\n\n" +
+        alertDialog.setMessage("You are seeing this message because you have no internet connection or your login information has expired\n\n" +
                 "This schedule has been loaded from your last session. It might no longer be up to date\n\n" +
-                "In order to view the latest schedule, please login");
+                "In order to view the latest schedule, please login or connect to the internet");
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {

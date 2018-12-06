@@ -21,7 +21,7 @@
         android:id="@+id/offlineMode"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="#003e7c"
         android:orientation="horizontal"
         android:visibility="gone">
 

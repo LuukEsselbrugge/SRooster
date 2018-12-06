@@ -3,8 +3,8 @@
 
     <item
         android:drawable="@drawable/ic_group_black_24dp"
-        android:width="16dp"
-        android:height="16dp"
+        android:width="17dp"
+        android:height="17dp"
         android:right="3dp"
         />
 
